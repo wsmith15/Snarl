@@ -10,8 +10,8 @@ public class GenerateMaze{
     
     
     
-    
-    
+    //formulas go HERE
+    //need to figure out an easy way to make solid blocks of BlackWalls
     
     
     

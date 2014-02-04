@@ -1,0 +1,14 @@
+
+package info.gridworld.actor;
+import info.gridworld.grid.Location;
+
+public class Player extends Actor
+{
+    public void act()
+    {
+        
+    }
+
+    
+    }
+}

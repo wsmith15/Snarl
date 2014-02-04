@@ -1,0 +1,18 @@
+import info.gridworld.actor.ActorWorld;
+import info.gridworld.actor.BlackWall;
+
+import java.awt.Color;
+
+/**
+ * This class runs a world that contains Termites. <br />
+ */
+public class SnarlRunner {
+    
+    public static void main(String[] args) {
+        ActorWorld world = new ActorWorld();
+System.out.println("Please Select a Maze Size");
+System.out.println("Enter in the corresponding number. \n 1. 20x20 \n 2. 30x30 \n 3. 40x40 \n 4. 50x50 \n 5. Enter in your own dimensions.");
+        
+        world.show();
+    }
+}

@@ -1,0 +1,29 @@
+package info.gridworld.actor;
+import java.awt.Color;
+
+public class BlackWall extends Actor
+{
+    
+    
+    private static final Color DEFAULT_COLOR = Color.BLACK;
+
+    public BlackWall()
+    {
+        setColor(DEFAULT_COLOR);
+    }
+
+
+    public BlackWall(Color rockColor)
+    {
+        setColor(rockColor);
+    }
+
+    /**
+     * Overrides the <code>act</code> method in the <code>Actor</code> class
+     * to do nothing.
+     */
+    public void act()
+    {
+    }
+}
+

@@ -22,11 +22,12 @@ public class SnarlRunner {
     
     for (int i=0; i<=dimension; i++){
       for (int j=0; j<=dimension; j++){//makes a fat block of tiles - walls for the maze
-        world.add(new Location(i, j), new BlackWall());
+        world.add(new Location(i, j), new BlackWall());//unsure if this has to go here - can a world span multiple classes?
       }
     }
-    GenerateMaze.generate(dimension);
-
+    
+    world.add(new Location(dimension/2, 0), new MazeRunner());
+    world.add(new Location(dimension/2, dimension), new MazeRunner());
     world.show();
     
   }

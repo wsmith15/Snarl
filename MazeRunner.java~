@@ -1,0 +1,16 @@
+import info.gridworld.actor.Bug;
+
+
+public class MazeRunner extends Bug
+{
+  
+
+    public void act()
+    {
+        if (canMove())
+        {
+            move();
+            steps++;
+        }
+    }
+}

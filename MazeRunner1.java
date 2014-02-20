@@ -15,8 +15,8 @@ public class MazeRunner extends Bug
   ArrayList<Location> adjacentCells = new ArrayList<Location>
     
     
-public ArrayList<Location> getCardinalAdjacentOccupiedLocations(Location loc){
     
+public ArrayList getCardinalAdjacentOccupiedLocations(Location loc){
     ArrayList<Location> output = new ArrayList<Location>();
     
     for (int i = 0; i<4; i++){
@@ -39,20 +39,21 @@ public ArrayList<Location> getCardinalAdjacentOccupiedLocations(Location loc){
   //code for recursion goes here, after bug generates maze it kills itself and then the world shows itself
   //while the placeholder for end maze is not in one of the cardinal directions
   
-
-
-public void recurseThisMaze(Location loc)
-{
-  adjacentCells.clear();
-  for (int i = 0; i<4; i++){
-    adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+  
+  
+  public void recurseThisMaze(Location loc)
+  {
+    adjacentCells.clear();
+    for (int i = 0; i<4; i++){
+      adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+    }
+    
+    a = (int)(Math.Random()*4);
+    
+    for (Location a : adjacentCells){
+      if (!visitedCells.contains(a)) recurseThisMaze(a); 
+    }
+    
   }
   
-  a = (int)(Math.Random()*4);
-  
-  for (Location a : adjacentCells){
-    if (!visitedCells.contains(a)) recurseThisMaze(a); 
-  }
-  
-}
 }

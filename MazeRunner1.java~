@@ -15,8 +15,8 @@ public class MazeRunner extends Bug
   ArrayList<Location> adjacentCells = new ArrayList<Location>
     
     
-public ArrayList<Location> getCardinalAdjacentOccupiedLocations(Location loc){
     
+    public ArrayList getCardinalAdjacentOccupiedLocations(Location loc){
     ArrayList<Location> output = new ArrayList<Location>();
     
     for (int i = 0; i<4; i++){

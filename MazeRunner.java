@@ -7,59 +7,42 @@ import java.util.ArrayList;
 
 public class MazeRunner extends Bug
 {
-  
-  
-  private ArrayList<Location> visitedCells = new ArrayList<Location>();
   private int[] directions = new int[4];
-  private int i = 1;
-  ArrayList<Location> adjacentCells = new ArrayList<Location>
-    
-    public MazeRunner(){
-    setDirection(90);
-    directions[0] = 0;
-    directions[1] = 90;
-    directions[2] = 180;
-    directions[3] = 270;
+  private ArrayList<Location> adjacentCells = new ArrayList<Location>();
+  private int i = 0;
+  private ArrayList<Location> visitedCells = new ArrayList<Location>();
+  private Location exit = getLocation();
+  private Location loc1 = getLocation();
+  
+  public MazeRunner(){
+   directions[0] = 0;
+   directions[1] = 90;
+   directions[2] = 180;
+   directions[3] = 270;
   }
   
   
-  public ArrayList getCardinalAdjacentOccupiedLocations(Location loc){
-    ArrayList<Location> output = new ArrayList<Location>();
-    
-    for (int i = 0; i<4; i++){
-      output.add(loc.getAdjacentLocation(directions[i]));
-    }
-    return output;
-  }
-  
-  
-  
-  public void act()
-  {
-    
-    Location exit = getLocation();
-    visitedCells.add(getLocation());
-    recurseThisMaze(getLocation());
-  }
-  
-  
-  //code for recursion goes here, after bug generates maze it kills itself and then the world shows itself
-  //while the placeholder for end maze is not in one of the cardinal directions
-  
-}
-
-public void recurseThisMaze(Location loc)
+  public void recurseThisMaze(Location loc)
 {
+  moveTo(loc);
   adjacentCells.clear();
   for (int i = 0; i<4; i++){
     adjacentCells.add(loc.getAdjacentLocation(directions[i]));
   }
   
-  a = (int)(Math.Random()*4);
+  i = (int)(Math.random()*4);
+  loc1 = adjacentCells.get(i);
   
-  for (Location a : adjacentCells){
-    if (!visitedCells.contains(a)) recurseThisMaze(a); 
+  if (visitedCells.contains(loc1)){
+    for(Location a : adjacentCells){
+      if (!visitedCells.contains(a)){
+       recurseThisMaze(a); 
+      }
+    }
   }
+  else{
+      recurseThisMaze(loc1);
+    }
   
 }
 }

@@ -5,12 +5,7 @@ import info.gridworld.actor.Actor;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Player extends Bug
+public class BlockRunner extends Bug
 {
-  
-  public static void prompt(){
-    
-  }
-  
   
 }

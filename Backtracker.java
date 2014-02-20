@@ -5,10 +5,10 @@ import info.gridworld.actor.Actor;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Player extends Bug
+public class Backtracker extends Bug
 {
   
-  public static void prompt(){
+  public static void backTrack(){
     
   }
   

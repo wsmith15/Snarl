@@ -26,6 +26,10 @@ public class SnarlRunner {
     
     world.add(new Location(dimension/2, 0), new MazeRunner());
     world.add(new Location(dimension/2, dimension), new MazeRunner());
+    world.step();
+    
+    world.add(new Location(dimension/2, 0), new Player());
+    
     world.show();
     
   }

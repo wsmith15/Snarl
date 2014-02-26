@@ -8,5 +8,9 @@ import java.util.ArrayList;
 public class Player extends Bug
 {
   
+  public static void prompt(){
+    
+  }
+  
   
 }

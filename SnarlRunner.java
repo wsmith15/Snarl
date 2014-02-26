@@ -10,10 +10,10 @@ import info.gridworld.actor.Actor;
 import java.awt.Color;
 
 public class SnarlRunner {
+   public static boolean mazeIsDone = false;
   
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
-    boolean mazeIsDone = false;
     int steps = 0;
     
     System.out.println("Please Select a Maze Size by entering the corresponding number.");
@@ -39,5 +39,11 @@ public class SnarlRunner {
     
     Backtracker.backTrack();
     
+    
   }
+  
+  public static void end(){
+   mazeIsDone = true; 
+  }
+  
 }

@@ -37,7 +37,9 @@ public class SnarlRunner {
       steps++;
     }
     
-    Backtracker.backTrack();
+    Backtracker back = new Backtracker();
+    
+    System.out.println("You took"+steps+"steps. The minimum number of steps necessary was"+back.backTrack());
     
     
   }

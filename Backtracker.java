@@ -9,50 +9,80 @@ import info.gridworld.actor.ImmuneWall;
 
 public class Backtracker extends Bug
 {
+  private ArrayList<Location> adjacentCells = new ArrayList<Location>();
+  Location loc = getLocation();
+  private int[] directions = new int[4];
+  private boolean isAdding = true;
   
-  public static int backTrack(){
+  public Backtracker(){
+    directions[0] = 0;
+    directions[1] = 90;
+    directions[2] = 180;
+    directions[3] = 270;
+  }
+  
+  
+  public int backTrack(){
     int a = 0;
-    int output = 0;
-      while (a == 0){
-        if (getLocation().getAdjacentLocationTowards(getDirection()) instanceof ImmuneWall){
-         a = 1; 
-        }
-        run();
+    int totalCounter=0;
+    while (a == 0){
+      if (getGrid().get(getLocation().getAdjacentLocation(getDirection())) instanceof ImmuneWall){
+        a = 1;
+        break;
+      }
+      if (getGrid().get(getLocation().getAdjacentLocation(getDirection())) instanceof Flower){
+        if (isAdding==true) isAdding = false;
+        else isAdding = true;
         
       }
-      
-      return output;
-  }
-
-  
-  public void act(){
-   if (canMove()) move();
-   else{
-    turn();
-    turn();
-   }
-   
-  }
-  //runs along maze dropping flower at junctions. keeps a counter of running total of steps and a separate counter of steps in particular junction.
-  // if it sees a flower in front of it, subtracts current total of junctionsteps from running total of steps. repeats this until it sees the immunewall, or end of the maze.
-  
-  
-      public void move()
-    {
-        Grid<Actor> gr = getGrid();
-        if (gr == null)
-            return;
-        Location loc = getLocation();
-        Location next = loc.getAdjacentLocation(getDirection());
-        if (gr.isValid(next))
-            moveTo(next);
-        else
-            removeSelfFromGrid();
-        if (getGrid().getEmptyAdjacentLocations(getLocation()).size() > 2){//drops flowers at junctions
-        Flower flower = new Flower(getColor());
-        flower.putSelfInGrid(gr, loc);
+      if (isAdding ==true){
+        if (canMove()){
+          run();
+          totalCounter++;
         }
+        else{
+          run();
+          totalCounter--;
+        }
+      }
+      else{
+        turn();
+        turn();
+        isAdding = false;
+      }
     }
+    return totalCounter;
+    
+  }
   
+  public int cardinalEmpties(){
+    loc = getLocation();
+    
+    for (int i = 0; i<4; i++){
+      if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
+        adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+      }
+    }
+    return adjacentCells.size();
+}
   
+  public void run()
+  {
+    Grid<Actor> gr = getGrid();
+    if (gr == null)
+      return;
+    Location loc = getLocation();
+    Location next = loc.getAdjacentLocation(getDirection());
+    if (gr.isValid(next))
+      moveTo(next);
+    else
+      removeSelfFromGrid();
+    
+    if (cardinalEmpties() > 2){//drops flowers at junctions
+      Flower flower = new Flower(getColor());
+      flower.putSelfInGrid(gr, loc);
+    }
+    
+    
+  }
 }

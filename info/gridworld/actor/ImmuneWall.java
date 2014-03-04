@@ -9,7 +9,6 @@ public class ImmuneWall extends Actor
 
     public ImmuneWall()
     {
-        setColor(DEFAULT_COLOR);
     }
 
 

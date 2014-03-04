@@ -29,17 +29,20 @@ public class MazeRunner extends Bug
   
   public void recurseThisMaze(Location loc)
 {
-
+  //System.out.println("moved to"+loc);
   super.moveTo(loc);
   adjacentCells.clear();
+  //System.out.println("cleared list");
   for (int i = 0; i<4; i++){
     if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
     adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+    //System.out.println("this went through");
     }
   }
     for(Location a :adjacentCells){
       if (getGrid().get(a) instanceof ImmuneWall){//kills itself once it finds an immunewall
        removeSelfFromGrid();
+       break;
       }
     }
     

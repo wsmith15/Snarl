@@ -25,41 +25,42 @@ public class MazeRunner extends Bug
   
   public void act(){
     recurseThisMaze(getLocation());
-    removeSelfFromGrid();
   }
   
   public void recurseThisMaze(Location loc)
 {
+
   super.moveTo(loc);
-  System.out.println("moved to"+loc);
   adjacentCells.clear();
   for (int i = 0; i<4; i++){
+    if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
     adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+    }
   }
     for(Location a :adjacentCells){
-      if (getGrid().get(a) instanceof ImmuneWall){
-       return; 
+      if (getGrid().get(a) instanceof ImmuneWall){//kills itself once it finds an immunewall
+       removeSelfFromGrid();
       }
     }
-  i = (int)(Math.random()*4);
+    
+    if (getGrid() != null){
+  i = (int)(Math.random()*adjacentCells.size());
   loc1 = adjacentCells.get(i);
   
-  for(int q = i; q < 3; q++){
+  for(int q = i; q < adjacentCells.size(); q++){
     loc1 = adjacentCells.get(q);
     if (!visitedCells.contains(loc1)){
-      if (getGrid().isValid(loc1)){
     recurseThisMaze(loc1);
-      }
      }
   }
   for (int r = 0; r < i; r++){
     loc1 = adjacentCells.get(r);
   if (!visitedCells.contains(loc1)){
-    if (getGrid().isValid(loc1)){
     recurseThisMaze(loc1);
-      }
+      
   }
   }
+}
 }
   
 }

@@ -9,8 +9,17 @@ public class Player extends Bug
 {
   
   public static void prompt(){
+   //moves player to specified location
     
-  }
-  
-  
+    
+   /* for(Actor a : getLocation().getOccupiedAdjacentLocations()){
+      if (a instanceof immunewall){//if it hits an immunewall, ends the game
+        SnarlRunner.end();
+        }
+      }
+      */
+    
+    }
+    
 }
+  

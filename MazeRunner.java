@@ -5,18 +5,15 @@ import info.gridworld.actor.Actor;
 import java.awt.Color;
 import java.util.ArrayList;
 import info.gridworld.actor.ImmuneWall;
-import java.util.Random;
 
 public class MazeRunner extends Bug
 {
   private int[] directions = new int[4];
-  private ArrayList<Location> wallCells = new ArrayList<Location>();
+  private ArrayList<Location> adjacentCells = new ArrayList<Location>();
   private int i = 0;
   private ArrayList<Location> visitedCells = new ArrayList<Location>();
   private Location exit = getLocation();
   private Location loc1 = getLocation();
-  private Random r = new Random();
-  private int random = 0;
   
   public MazeRunner(){
    directions[0] = 0;
@@ -30,43 +27,43 @@ public class MazeRunner extends Bug
     recurseThisMaze(getLocation());
   }
   
-  
-  
-  
-  
-  
-  
-  
   public void recurseThisMaze(Location loc)
 {
-    
+  //System.out.println("moved to"+loc);
   super.moveTo(loc);
-  visitedCells.add(loc);
-  
+  adjacentCells.clear();
+  //System.out.println("cleared list");
   for (int i = 0; i<4; i++){
     if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
-    wallCells.add(loc.getAdjacentLocation(directions[i]));
-    //adds adjacent cells to the list of walls
+    adjacentCells.add(loc.getAdjacentLocation(directions[i]));
+    //System.out.println("this went through");
     }
   }
-  while (wallCells.size() > 0){
-  random = r.nextInt(wallCells.size());
-  loc = wallCells.get(random);
+    for(Location a :adjacentCells){
+      if (getGrid().get(a) instanceof ImmuneWall){//kills itself once it finds an immunewall
+       removeSelfFromGrid();
+       break;
+      }
+    }
+    
+    if (getGrid() != null){
+  i = (int)(Math.random()*adjacentCells.size());
+  loc1 = adjacentCells.get(i);
   
-  if (visitedCells.contains(loc.getAdjacentLocation(getLocation().getDirectionToward(loc)))){
-    wallCells.remove(random);
+  for(int q = i; q < adjacentCells.size(); q++){
+    loc1 = adjacentCells.get(q);
+    if (!visitedCells.contains(loc1)){
+    recurseThisMaze(loc1);
+     }
   }
-  else{
-    moveTo(loc);
-    for (int i = 0; i<4; i++){
-    if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
-    wallCells.add(loc.getAdjacentLocation(directions[i]));
-    //adds adjacent cells to the list of walls
-    }
-  }
+  for (int r = 0; r < i; r++){
+    loc1 = adjacentCells.get(r);
+  if (!visitedCells.contains(loc1)){
+    recurseThisMaze(loc1);
       
   }
   }
 }
- 
+}
+  
 }

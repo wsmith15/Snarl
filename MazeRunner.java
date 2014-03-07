@@ -38,7 +38,7 @@ public class MazeRunner extends Bug
   
   public void recurseThisMaze(Location loc)
   {
-    
+    if( getGrid().isValid(loc)){
     moveTo(loc);//moves to loc
     visitedCells.add(loc);
     adjacentCells.clear();//clears adjacent cells araylist
@@ -53,15 +53,21 @@ public class MazeRunner extends Bug
     loc1 = adjacentCells.get(i);
     System.out.println("randomly chose"+loc1); 
     
-    for (int q = i; i < 4 ; i++){
-      if (canBecomePart(adjacentCells.get(q))){
+    for (int q = i; i < 3 ; i++){
+      System.out.println("checking"+q+"out of q's"+adjacentCells.size());
+      if (canBecomePart(adjacentCells.get(q)) && getGrid().isValid(adjacentCells.get(q))){
         recurseThisMaze(adjacentCells.get(q));
       }
     }
-    for (int r = 0; r<i; r++){
-      if (canBecomePart(adjacentCells.get(r))){
+    for (int r = 0; r < i; r++){
+      System.out.println("checking"+r+"out of r's"+adjacentCells.size());
+      if(r==adjacentCells.size()){
+        break;
+      }
+      if (canBecomePart(adjacentCells.get(r)) && getGrid().isValid(adjacentCells.get(r))){
         recurseThisMaze(adjacentCells.get(r));
       }
+    }
     }
   }
     public boolean canBecomePart(Location loc){

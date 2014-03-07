@@ -20,20 +20,26 @@ public class SnarlRunner {
     System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive \n 5. INSANE");
     int dimension = input.nextInt()*10;
     ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(dimension,dimension));
-    //world.add(new Location(0,0), new BlockRunner());
-    world.step();//spawns block runner which runs around placing tiles
+    
+    for (int i=0; i<dimension; i++){
+      for (int j=0; j<dimension; j++){//makes a fat block of tiles - walls for the maze
+        world.add(new Location(i, j), new BlackWall());//unsure if this has to go here - can a world span multiple classes?
+      }//screw blockrunners, imma just generate this here.
+      }
+    world.show();
+    world.step();
     
     
     world.add(new Location(dimension/2, dimension-1), new ImmuneWall());
-    world.add(new Location(dimension/2, 0), new MazeRunner());
+    world.add(new Location(dimension/2, 1), new MazeRunner());
     world.step();//spawns a mazerunner which fleshes out a maze from the block
     
-    world.add(new Location(dimension/2, 0), new Player());
+    world.add(new Location(dimension/2, 1), new Player());
     //spawns a player
     world.show();
     //shows world
     while (!mazeIsDone){//while the player hasn't yet completed the maze, prompt the player for the next move.
-      Player.prompt();
+     // Player.prompt();
       steps++;
     }
     

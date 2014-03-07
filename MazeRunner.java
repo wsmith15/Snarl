@@ -11,6 +11,8 @@ public class MazeRunner extends Bug
   private int[] directions = new int[4];
   private ArrayList<Location> adjacentCells = new ArrayList<Location>();
   private int i = 0;
+  private int a = 1;
+  private int c = 0;
   private ArrayList<Location> visitedCells = new ArrayList<Location>();
   private Location exit = getLocation();
   private Location loc1 = getLocation();
@@ -26,10 +28,36 @@ public class MazeRunner extends Bug
   
   
   public void act(){
+    while(numBlocks() < halfnumMaze()+10){
+      if (a==1){
     recurseThisMaze(getLocation());
-    removeSelfFromGrid();
+    a = 0;
+      }
+      else{
+        recurseThisMaze(randomLocation());
+      }
+    }
   }
   
+  public int numBlocks(){
+    return visitedCells.size();
+  }
+  
+  public int halfnumMaze(){
+    int a = 0;
+    int row = 0;
+    int col = 0;
+    row = getGrid().getNumRows();
+    col = getGrid().getNumCols();
+    a = row*col;
+    a = a/2;
+    return a;
+  }
+  
+  public Location randomLocation(){ 
+        c = (int)(Math.random()*getGrid().getOccupiedLocations().size());
+    return getGrid().getOccupiedLocations().get(c);
+  }
   
   
   
@@ -51,16 +79,13 @@ public class MazeRunner extends Bug
     
     i = (int)(Math.random()*adjacentCells.size());
     loc1 = adjacentCells.get(i);
-    System.out.println("randomly chose"+loc1); 
     
     for (int q = i; i < 3 ; i++){
-      System.out.println("checking"+q+"out of q's"+adjacentCells.size());
       if (canBecomePart(adjacentCells.get(q)) && getGrid().isValid(adjacentCells.get(q))){
         recurseThisMaze(adjacentCells.get(q));
       }
     }
     for (int r = 0; r < i; r++){
-      System.out.println("checking"+r+"out of r's"+adjacentCells.size());
       if(r==adjacentCells.size()){
         break;
       }

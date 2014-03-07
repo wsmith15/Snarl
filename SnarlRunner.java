@@ -20,32 +20,40 @@ public class SnarlRunner {
     System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive \n 5. INSANE");
     int dimension = input.nextInt()*10;
     ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(dimension,dimension));
+    world.setMessage("GET TO THE BLUE NOLAN. You may move by typing into the console the direction you wish to move in. (NORTH, RIGHT,  ETC.)");
+    
+    
     
     for (int i=0; i<dimension; i++){
       for (int j=0; j<dimension; j++){//makes a fat block of tiles - walls for the maze
         world.add(new Location(i, j), new BlackWall());//unsure if this has to go here - can a world span multiple classes?
       }//screw blockrunners, imma just generate this here.
       }
-    world.show();
+    
+    MazeRunner slave = new MazeRunner();
+    
+    world.add(new Location(dimension/2, 1), slave);
     world.step();
-    
-    
+    world.step();
+    slave.removeSelfFromGrid();
+    world.show();
     world.add(new Location(dimension/2, dimension-1), new ImmuneWall());
-    world.add(new Location(dimension/2, 1), new MazeRunner());
-    world.step();//spawns a mazerunner which fleshes out a maze from the block
     
-    world.add(new Location(dimension/2, 1), new Player());
+    Player realPlayer = new Player();
+    
+    world.add(new Location(dimension/2, 1), realPlayer);
     //spawns a player
     world.show();
     //shows world
     while (!mazeIsDone){//while the player hasn't yet completed the maze, prompt the player for the next move.
-     // Player.prompt();
+     realPlayer.prompt();
       steps++;
+      world.show();
     }
     
-    //Backtracker back = new Backtracker();
+    Backtracker back = new Backtracker();
     
-   // System.out.println("You took"+steps+"steps. The minimum number of steps necessary was"+back.backTrack());
+    System.out.println("You took"+steps+"steps. The minimum number of steps necessary was"+back.backTrack());
     
     
   }

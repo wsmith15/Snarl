@@ -5,6 +5,7 @@ import info.gridworld.actor.Actor;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Scanner;
+import info.gridworld.actor.ImmuneWall;
 
 public class Player extends Bug
 {
@@ -16,33 +17,41 @@ public class Player extends Bug
     
     if(a.equals("up") || a.equals("north")){
       setDirection(0);
+      if (canMove()){
       move();
+      }
     }
     
     if(a.equals("down") || a.equals("south")){
       setDirection(180);
+      if (canMove()){
       move();
+      }
     }
     
     if(a.equals("right") || a.equals("east")){
       setDirection(90);
+      if (canMove()){
       move();
+      }
     }
     
     if(a.equals("left") || a.equals("west")){
       setDirection(270);
+      if (canMove()){
       move();
+      }
     }
     
    //moves player to specified location
     
     
-   /* for(Actor a : getLocation().getOccupiedAdjacentLocations()){
-      if (a instanceof immunewall){//if it hits an immunewall, ends the game
+     for(Location b : getGrid().getOccupiedAdjacentLocations(getLocation())){
+      if (getGrid().get(b) instanceof ImmuneWall){//if it hits an immunewall, ends the game
         SnarlRunner.end();
         }
       }
-      */
+      
     
     }
     

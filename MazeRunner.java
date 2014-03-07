@@ -28,7 +28,7 @@ public class MazeRunner extends Bug
   
   
   public void act(){
-    while(numBlocks() < halfnumMaze()+10){
+    while(numBlocks() < halfnumMaze()-10){
       if (a==1){
     recurseThisMaze(getLocation());
     a = 0;
@@ -36,6 +36,7 @@ public class MazeRunner extends Bug
       else{
         recurseThisMaze(randomLocation());
       }
+      
     }
   }
   
@@ -122,65 +123,4 @@ public class MazeRunner extends Bug
     
     
   }
-
-/*
- public boolean canBecomePart(Location loc){
- int counter = 0;
- boolean output = false;
- Location thisLoc = getLocation();
- System.out.println("entered canBecomePart");
- for (int i = 0; i<4; i++){
- if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
- System.out.println("checked if first adjacent loc is valid");
- thisLoc = loc.getAdjacentLocation(directions[i]);
- System.out.println("set it equal to loc");
- if(visitedCells.contains(thisLoc)) {counter ++;
- }
- }
- }
- if (counter > 2){ output = false;
- System.out.println("set output to false");
- }
- 
- return output;
- }
- 
- public void recurseThisMaze(Location loc)
- {
- 
- super.moveTo(loc);//moves to loc
- adjacentCells.clear();//clears adjacent cells
- 
- for (int i = 0; i<4; i++){
- if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
- adjacentCells.add(loc.getAdjacentLocation(directions[i]));//adds new locs to adjacent cells
- }
- }
- 
- i = (int)(Math.random()*adjacentCells.size());
- loc1 = adjacentCells.get(i);
- System.out.println("randomly chose"+loc1);
- 
- 
- for(int q = i; q < adjacentCells.size(); q++){
- loc1 = adjacentCells.get(q);//starting with a random neighboring location in adjacent cells, recurses this one as
- if (canBecomePart(loc1)){
- System.out.println("recursed"+loc1);
- visitedCells.add(loc1);
- recurseThisMaze(loc1);
- }
- }
- for (int r = 0; r < i; r++){
- loc1 = adjacentCells.get(r);
- if (canBecomePart(loc1)){
- System.out.println("recursed"+loc1);
- visitedCells.add(loc1);
- recurseThisMaze(loc1);
- }
- }
- 
- 
- }
- }
- */
 

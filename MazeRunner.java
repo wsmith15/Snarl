@@ -14,6 +14,8 @@ public class MazeRunner extends Bug
   private ArrayList<Location> visitedCells = new ArrayList<Location>();
   private Location exit = getLocation();
   private Location loc1 = getLocation();
+  private ArrayList<Location> doubleVisitCell = new ArrayList<Location>();
+  private int counter;
   
   public MazeRunner(){
    directions[0] = 0;
@@ -25,45 +27,63 @@ public class MazeRunner extends Bug
   
   public void act(){
     recurseThisMaze(getLocation());
+    removeSelfFromGrid();
   }
   
   public void recurseThisMaze(Location loc)
 {
-  //System.out.println("moved to"+loc);
-  super.moveTo(loc);
-  adjacentCells.clear();
-  //System.out.println("cleared list");
+
+  super.moveTo(loc);//moves to loc
+  adjacentCells.clear();//clears adjacent cells
+
   for (int i = 0; i<4; i++){
     if (getGrid().isValid(loc.getAdjacentLocation(directions[i]))){
-    adjacentCells.add(loc.getAdjacentLocation(directions[i]));
-    //System.out.println("this went through");
+    adjacentCells.add(loc.getAdjacentLocation(directions[i]));//adds new locs to adjacent cells
     }
   }
-    for(Location a :adjacentCells){
-      if (getGrid().get(a) instanceof ImmuneWall){//kills itself once it finds an immunewall
-       removeSelfFromGrid();
-       break;
+    for(Location a :adjacentCells){//for every location in adjacent cells
+      for(int i = 0; i < 4; i++){
+      doubleVisitCell.add(a.getAdjacentLocation(directions[i]));//adds cardinal adjacent cells to arraylist for one adjacent cell
       }
+      for (Location b : doubleVisitCell){
+        if (visitedCells.contains(b)){//if one of those card cells are visited
+          counter++;//adds one ot the counter
+        }
+      
+      if (counter > 1){
+       visitedCells.add(b); //if two or more are visited, current card cell is now visi
+      }
+      }
+      counter = 0;//resets counter
+      doubleVisitCell.clear();//and card cell list
     }
-    
-    if (getGrid() != null){
-  i = (int)(Math.random()*adjacentCells.size());
+  
+    if (getGrid() == null){
+      return;
+}
+    else{
+        i = (int)(Math.random()*adjacentCells.size());
   loc1 = adjacentCells.get(i);
   
-  for(int q = i; q < adjacentCells.size(); q++){
+  recurseThisMaze(loc1);
+  
+  /*for(int q = i; q < adjacentCells.size(); q++){
     loc1 = adjacentCells.get(q);
     if (!visitedCells.contains(loc1)){
+    System.out.println("recursed"+loc1);
     recurseThisMaze(loc1);
      }
   }
   for (int r = 0; r < i; r++){
     loc1 = adjacentCells.get(r);
   if (!visitedCells.contains(loc1)){
+    System.out.println("recursed"+loc1);
     recurseThisMaze(loc1);
+  }
+  }
+  */
       
-  }
-  }
-}
+    }
 }
   
 }

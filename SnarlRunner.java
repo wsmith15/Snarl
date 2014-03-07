@@ -17,10 +17,10 @@ public class SnarlRunner {
     int steps = 0;
     
     System.out.println("Please Select a Maze Size by entering the corresponding number.");
-    System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive \n 5. INSANE");
+    System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive");
     int dimension = input.nextInt()*10;
     ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(dimension,dimension));
-    world.setMessage("GET TO THE BLUE NOLAN. You may move by typing into the console the direction you wish to move in. (NORTH, RIGHT,  ETC.)");
+    world.setMessage("GET TO THE BLUE NOLAN. Move by typing into the console the direction you want (north, right etc). You also may destroy one wall by moving over it, but you may only destroy one.");
     
     
     
@@ -51,11 +51,9 @@ public class SnarlRunner {
       world.show();
     }
     
-    Backtracker back = new Backtracker();
+    //Backtracker back = new Backtracker();
     
-    System.out.println("You took"+steps+"steps. The minimum number of steps necessary was"+back.backTrack());
-    
-    
+   System.out.println("You took "+steps+" steps. GOOD JOB.");
   }
   
   public static void end(){

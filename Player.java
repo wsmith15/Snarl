@@ -10,6 +10,8 @@ import info.gridworld.actor.ImmuneWall;
 public class Player extends Bug
 {
   
+  private boolean hasnotmovedover = true;
+  
   public void prompt(){
     Scanner input = new Scanner(System.in);
     String a = input.nextLine();
@@ -17,28 +19,41 @@ public class Player extends Bug
     
     if(a.equals("up") || a.equals("north")){
       setDirection(0);
-      if (canMove()){
+      if (hasnotmovedover || canMove()){
+                if(canMove()==false){
+         hasnotmovedover=false; 
+        }
       move();
       }
     }
     
     if(a.equals("down") || a.equals("south")){
       setDirection(180);
-      if (canMove()){
+      if (hasnotmovedover || canMove()){
+                if(canMove()==false){
+         hasnotmovedover=false; 
+        }
       move();
       }
     }
     
     if(a.equals("right") || a.equals("east")){
       setDirection(90);
-      if (canMove()){
+      if (hasnotmovedover || canMove()){
+                if(canMove()==false){
+         hasnotmovedover=false; 
+        }
       move();
       }
     }
     
     if(a.equals("left") || a.equals("west")){
       setDirection(270);
-      if (canMove()){
+      if (hasnotmovedover || canMove()){
+        if(canMove()==false){
+         hasnotmovedover=false; 
+        }
+        
       move();
       }
     }

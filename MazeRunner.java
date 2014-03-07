@@ -87,7 +87,7 @@ public class MazeRunner extends Bug
       }
     }
     for (int r = 0; r < i; r++){
-      if(r==adjacentCells.size()){
+      if(r==adjacentCells.size()|| r > adjacentCells.size()){
         break;
       }
       if (canBecomePart(adjacentCells.get(r)) && getGrid().isValid(adjacentCells.get(r))){

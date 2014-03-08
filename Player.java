@@ -10,48 +10,50 @@ import info.gridworld.actor.ImmuneWall;
 public class Player extends Bug
 {
   
-  private boolean hasnotmovedover = true;
+  private int hasnotmovedover = 0;
+  private int nummoveover = 2;
+    
   
   public void prompt(){
     Scanner input = new Scanner(System.in);
     String a = input.nextLine();
     a = a.toLowerCase();
     
-    if(a.equals("up") || a.equals("north")){
+    if(a.equals("up") || a.equals("north") || a.equals("w")){
       setDirection(0);
-      if (hasnotmovedover || canMove()){
+      if (hasnotmovedover < nummoveover|| canMove()){
                 if(canMove()==false){
-         hasnotmovedover=false; 
+         hasnotmovedover++; 
         }
       move();
       }
     }
     
-    if(a.equals("down") || a.equals("south")){
+    if(a.equals("down") || a.equals("south")  || a.equals("s")){
       setDirection(180);
-      if (hasnotmovedover || canMove()){
+      if (hasnotmovedover < nummoveover|| canMove()){
                 if(canMove()==false){
-         hasnotmovedover=false; 
+         hasnotmovedover++; 
         }
       move();
       }
     }
     
-    if(a.equals("right") || a.equals("east")){
+    if(a.equals("right") || a.equals("east")  || a.equals("d")){
       setDirection(90);
-      if (hasnotmovedover || canMove()){
+      if (hasnotmovedover < nummoveover|| canMove()){
                 if(canMove()==false){
-         hasnotmovedover=false; 
+         hasnotmovedover++;
         }
       move();
       }
     }
     
-    if(a.equals("left") || a.equals("west")){
+    if(a.equals("left") || a.equals("west")  || a.equals("a")){
       setDirection(270);
-      if (hasnotmovedover || canMove()){
+      if (hasnotmovedover < nummoveover|| canMove()){
         if(canMove()==false){
-         hasnotmovedover=false; 
+         hasnotmovedover++;
         }
         
       move();

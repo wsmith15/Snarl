@@ -20,7 +20,7 @@ public class SnarlRunner {
     System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive");
     int dimension = input.nextInt()*10;
     ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(dimension,dimension));
-    world.setMessage("GET TO THE BLUE NOLAN. Move by typing into the console the direction you want (north, right etc). You also may destroy one wall by moving over it, but you may only destroy one.");
+    world.setMessage("GET TO THE BLUE NOLAN. Move by typing direction into the console (n,s,w,e). You also may destroy up to two walls by moving over it");
     
     
     

@@ -16,11 +16,20 @@ public class SnarlRunner {
     Scanner input = new Scanner(System.in);
     int steps = 0;
     
-    System.out.println("Please Select a Maze Size by entering the corresponding number.");
+    System.out.println("WELCOME TO SNARL - A Maze Generation and solving game");
+    System.out.println("In this version of Snarl, you may 'destroy' up to two blocks in the maze");
+    System.out.println("please type 'w' 'a' 's' or 'd' into the dialogue prompt to move your bug-character once you are in-game");
+    System.out.println("Now, before we begin, please select a Maze Size by entering the corresponding number.");
+    System.out.println("Please Select a Maze Size by entering the corresponding number - if you receive a stack overflow error, please ignore it and restart the program");
     System.out.println("1. Small \n 2. Medium \n 3. Large \n 4. Massive");
     int dimension = input.nextInt()*10;
+    while(dimension > 40 || dimension < 10){
+     dimension = input.nextInt()*10; 
+    }
+    
+    
     ActorWorld world = new ActorWorld(new BoundedGrid<Actor>(dimension,dimension));
-    world.setMessage("GET TO THE BLUE NOLAN. Move by typing direction into the console (n,s,w,e). You also may destroy up to two walls by moving over it");
+    world.setMessage("GET TO THE BLUE NOLAN. Move by typing WASD direction into the console (w is up, s is down, etc). You also may destroy up to two walls by moving over it");
     
     
     

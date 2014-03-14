@@ -10,8 +10,5 @@ import info.gridworld.actor.Player;
 
 public class SnarlWorld extends ActorWorld
 {
-public SnarlWorld()
-{
-setGrid(new UnboundedGrid<Actor>());
-}
+
 }
